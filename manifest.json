@@ -1,0 +1,22 @@
+{
+    "name": "Highlight some phrases",
+    "description": "Hightlight some pre defined text from websql database after page loads",
+    "version": "0.1",
+    "permissions": [
+    "tabs","<all_urls>"
+    ],
+    "browser_action": {
+        "default_icon": "icon.png"
+    },
+
+    "content_scripts": [
+        {
+        "matches": [
+        "https://www.netflix.com/*"
+            ],
+        "js": ["content.js"],
+        "run_at": "document_end"         // pay attention to this line
+        }
+    ], 
+    "manifest_version":2
+}
