@@ -12,10 +12,10 @@
     "content_scripts": [
         {
         "matches": [
-        "https://www.netflix.com/*"
+        "https://www.netflix.com/watch/*"
             ],
         "js": ["content.js"],
-        "run_at": "document_end"         // pay attention to this line
+        "run_at": "document_end"   
         }
     ], 
     "manifest_version":2
