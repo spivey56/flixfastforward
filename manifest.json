@@ -1,6 +1,6 @@
 {
-    "name": "Highlight some phrases",
-    "description": "Hightlight some pre defined text from websql database after page loads",
+    "name": "Flix Fast Forward",
+    "description": "Never sit through an intro on netflix again",
     "version": "0.1",
     "permissions": [
     "tabs","<all_urls>"
@@ -15,7 +15,7 @@
         "https://www.netflix.com/watch/*"
             ],
         "js": ["content.js"],
-        "run_at": "document_end"   
+        "run_at": "document_end"         // pay attention to this line
         }
     ], 
     "manifest_version":2
