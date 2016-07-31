@@ -11,12 +11,16 @@
 
     "content_scripts": [
         {
-        "matches": [
-        "https://www.netflix.com/watch/*"
+            "matches": [
+                "https://www.netflix.com/watch/*"
             ],
-        "js": ["jquery-1.12.3.min.js","content.js"],
-        "run_at": "document_end"
 
-    }],
+            "js": [
+                "jquery-1.12.3.min.js",
+                "content.js"
+            ],
+            "run_at": "document_end"
+        }
+    ],
     "manifest_version":2
 }
