@@ -12,8 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('admin/intros/index');
 });
-
 
 Route::resource('admin/intros', 'Admin\\IntrosController');
