@@ -13,6 +13,8 @@ $(document).ready(function () {
 
                 localStorage.setItem("skipped", "FullHouse");
 
+
+
             }
 
 
