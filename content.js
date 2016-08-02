@@ -8,28 +8,32 @@ $(document).ready(function() {
   var skipTime = 300;
 
     if (!window.location.hash) {
-        //window.location = window.location + '#skipped';
         window.open(window.location.href + "&t=" + skipTime + "#skipped", "_self");
     }
     else{
-      $("video").bind("play", function(e) {
+
+      console.log('gets to else');
+
+      //$("video").bind("play", function(e) {
           time = setInterval(function() {
 
               var skip = $("video").get(0).currentTime;
               var time = parseInt(skip);
-              var timeSkip = 115; //Get this from database
-              var intro = 34; //call from database depending on tvName
-              var toThisPoint = timeSkip + intro;
+              var beforeIntro = 250; //Get this from database
+              var intro = 50; //call from database depending on tvName
+              var toThisPoint = beforeIntro + intro;
 
-              if (time >= timeSkip && time < toThisPoint - 1) {
+              console.log(toThisPoint);
+
+              if (time >= beforeIntro && time < toThisPoint-1) {
+                  console.log("skippedIntro")
                   window.open(window.location.href + "&t=" + toThisPoint + "#skipped", "_self");
               }
 
-
               console.log(time);
 
-          }, 100);
-      });
+          }, 500);
+      //});
     }
 
 });
