@@ -12,7 +12,6 @@ $(document).ready(function() {
         window.open(window.location.href + "&t=" + skipTime + "#skipped", "_self");
     }
     else{
-      $("video").bind("play", function(e) {
           time = setInterval(function() {
 
               var skip = $("video").get(0).currentTime;
@@ -28,8 +27,7 @@ $(document).ready(function() {
 
               console.log(time);
 
-          }, 100);
-      });
+          }, 500);
     }
 
 });
