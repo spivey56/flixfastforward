@@ -1,3 +1,4 @@
+
 /*
 $(document).ready(function () {
 time = setInterval(function(){}
@@ -33,4 +34,5 @@ $(document).ready(function () {
         console.log(time);
 
     }, 500);
+
 });
