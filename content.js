@@ -1,33 +1,36 @@
-$(document).ready(function() {
+/*
+$(document).ready(function () {
+time = setInterval(function(){}
+  var currentWindow = window.location.href;
+  currentWindow.toString();
+  if(currentWindow==="https://www.netflix.com/browse"){
+    console.log("Browsing");
+  }else {
+    watch();
+  }
+}, 500);
+*/
+var timeSkip = 115;//Get this from database
+var intro = 34; //call from database depending on tvName
+var toThisPoint = timeSkip + intro;
+var tvLong = $("span").text();
+var locNum = tvLong.search("Season");
+var tvName = tvLong.slice(0, locNum);
+var tvSeason = tvLong.slice(locNum + 7, locNum + 8);
+var tvEpisode = tvLong.slice(locNum + 14, locNum + 15);
+$(document).ready(function () {
+    localStorage.clear();
+    time = setInterval(function () {
+        var skip = $("video").get(0).currentTime;
+        var time = parseInt(skip);
+        if (time >= timeSkip && time < toThisPoint - 1) {
+            if (!localStorage.getItem("skipped")) {
+                window.open(window.location.href + "&t=" + toThisPoint, "_self");
+                localStorage.setItem("skipped", tvName + "." + tvSeason + "." + tvEpisode);
+            }
+        }
 
-  var tvLong = $("span").text();
-  var locNum = tvLong.search("Season");
-  var tvName = tvLong.slice(0, locNum);
-  var tvSeason = tvLong.slice(locNum + 7, locNum + 8);
-  var tvEpisode = tvLong.slice(locNum + 14, locNum + 15);
-  var skipTime = 300;
+        console.log(time);
 
-    if (!window.location.hash) {
-        //window.location = window.location + '#skipped';
-        window.open(window.location.href + "&t=" + skipTime + "#skipped", "_self");
-    }
-    else{
-          time = setInterval(function() {
-
-              var skip = $("video").get(0).currentTime;
-              var time = parseInt(skip);
-              var timeSkip = 115; //Get this from database
-              var intro = 34; //call from database depending on tvName
-              var toThisPoint = timeSkip + intro;
-
-              if (time >= timeSkip && time < toThisPoint - 1) {
-                  window.open(window.location.href + "&t=" + toThisPoint + "#skipped", "_self");
-              }
-
-
-              console.log(time);
-
-          }, 500);
-    }
-
+    }, 500);
 });

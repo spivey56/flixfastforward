@@ -3,23 +3,26 @@
     "description": "Never sit through an intro on netflix again",
     "version": "0.1",
     "permissions": [
-    "tabs","<all_urls>"
+      "https://www.netflix.com/*"
     ],
     "browser_action": {
         "default_icon": "icon.png",
         "default_popup": "popup.html"
 
     },
-
+    "web_accessible_resources": [
+        "content.js"
+      ],
     "content_scripts": [
         {
             "matches": [
-                "https://www.netflix.com/watch/*"
+                "https://www.netflix.com/*"
             ],
 
             "js": [
                 "jquery-1.12.3.min.js",
                 "content.js"
+
             ],
             "run_at": "document_end"
         }
