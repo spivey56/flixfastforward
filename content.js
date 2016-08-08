@@ -18,9 +18,13 @@ $(document).ready(function () {
       var time = parseInt(skip);
       if (time >= timeSkip && time < toThisPoint - 1) {
         if (!localStorage.getItem("skipped")) {
+          var shouldLoad = currentWindow.search("&t=");
+          if(shouldLoad>0){
+            window.open(window.location.href, "_self");
+          } else {
             window.open(window.location.href + "&t=" + toThisPoint, "_self");
-            localStorage.setItem("skipped", tvName + "." + tvSeason + "." + tvEpisode);
-            }
+          }
+          localStorage.setItem("skipped", tvName + "." + tvSeason + "." + tvEpisode);
           }
   }
           console.log(time);
