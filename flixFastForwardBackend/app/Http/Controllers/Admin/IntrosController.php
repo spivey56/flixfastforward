@@ -25,6 +25,19 @@ class IntrosController extends Controller
     }
 
     /**
+     * @param id of intro episode
+     * @return start and skip times in object
+     */
+    public function getStartAndSkipTimes($id){
+        $intro = Intro::findOrFail($id);
+        $arry=array("start_time"=>$intro->start_time,
+            "duration"=>$intro->duration
+            );
+        return json_encode($arry);
+    }
+
+
+    /**
      * Show the form for creating a new resource.
      *
      * @return void
@@ -41,7 +54,9 @@ class IntrosController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, ['user_id' => 'required', 'title' => 'required', 'duration' => 'required', ]);
+        $this->validate($request, ['user_id' => 'required', 'title' => 'required', 'duration' => 'required','start_time' => 'required']);
+
+        //dd($request->all());
 
         Intro::create($request->all());
 

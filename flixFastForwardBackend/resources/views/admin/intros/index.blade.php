@@ -13,6 +13,7 @@
                     <th>S.No</th>
                     <th> User Id</th>
                     <th> Title</th>
+                    <th> Start Time</th>
                     <th> Duration</th>
                     <th>Actions</th>
                 </tr>
@@ -25,6 +26,7 @@
                             <td>{{ $x }}</td>
                             <td>{{ $item->user_id }}</td>
                             <td>{{ $item->title }}</td>
+                            <td>{{ $item->start_time }}</td>
                             <td>{{ $item->duration }}</td>
                             <td>
                                 <a href="{{ url('/admin/intros/' . $item->id) }}" class="btn btn-success btn-xs"

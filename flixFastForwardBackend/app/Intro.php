@@ -25,5 +25,5 @@ class Intro extends Model
      *
      * @var array
      */
-    protected $fillable = ['user_id', 'title', 'duration'];
+    protected $fillable = ['user_id', 'title', 'duration','start_time'];
 }
