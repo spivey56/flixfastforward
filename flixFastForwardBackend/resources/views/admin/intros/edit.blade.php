@@ -25,6 +25,13 @@
                     {!! $errors->first('title', '<p class="help-block">:message</p>') !!}
                 </div>
             </div>
+    <div class="form-group {{ $errors->has('start_time') ? 'has-error' : ''}}">
+        {!! Form::label('start_time', 'Start Time', ['class' => 'col-sm-3 control-label']) !!}
+        <div class="col-sm-6">
+            {!! Form::number('start_time', null, ['class' => 'form-control', 'required' => 'required']) !!}
+            {!! $errors->first('start_time', '<p class="help-block">:message</p>') !!}
+        </div>
+    </div>
             <div class="form-group {{ $errors->has('duration') ? 'has-error' : ''}}">
                 {!! Form::label('duration', 'Duration', ['class' => 'col-sm-3 control-label']) !!}
                 <div class="col-sm-6">

@@ -24,7 +24,7 @@
                 <tr>
                     <th>ID</th><td>{{ $intro->id }}</td>
                 </tr>
-                <tr><th> User Id </th><td> {{ $intro->user_id }} </td></tr><tr><th> Title </th><td> {{ $intro->title }} </td></tr><tr><th> Duration </th><td> {{ $intro->duration }} </td></tr>
+                <tr><th> User Id </th><td> {{ $intro->user_id }} </td></tr><tr><th> Title </th><td> {{ $intro->title }} </td></tr><tr><th> Start Time </th><td> {{ $intro->start_time }} </td></tr><tr><th> Duration </th><td> {{ $intro->duration }} </td></tr>
             </tbody>
         </table>
     </div>
