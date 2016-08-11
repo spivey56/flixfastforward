@@ -25,9 +25,9 @@ $(document).ready(function () {
     console.log(tvLong.slice(locNum + 15, locNum + 16));
     var title = tvName + "." + tvSeason + "." + tvEpisode;
     console.log(goneIn);
-    if(true){
+    if(title!=".." && goneIn==false){
       goneIn = true;
-      ajaxCall(title);
+      ajaxCall('1');
     }
     console.log(title);
     if(currentWindow==="https://www.netflix.com/browse"){
@@ -60,17 +60,30 @@ function ajaxCall(title) {
     // 2) Send a http request with AJAX http://api.jquery.com/jQuery.ajax/
     //-----------------------------------------------------------------------
     $.ajax({
-      url: 'admin/intros/times/'+title,                  //the script to call to get data
-      data: "",                        //you can insert url argumnets here to pass to api.php
+      url: 'https://localhost:8000/admin/intros/times/'+title,                  //the script to call to get data                      //you can insert url argumnets here to pass to api.php
       type: "GET",                                 //for example "id=5&parent=6"
       dataType: 'json',                //data format
       success: function(data)          //on recieve of reply
       {
+        console.log("Success!");
         console.log(data);
 
       },
-      error: function (error) {
-        console.log(error);
-      }
+// start snippet
+error: function(XMLHttpRequest, textStatus, errorThrown) {
+        if (XMLHttpRequest.readyState == 4) {
+            // HTTP error (can be checked by XMLHttpRequest.status and XMLHttpRequest.statusText)
+            console.log("HTTP ERROR" +textStatus);
+        }
+        else if (XMLHttpRequest.readyState == 0) {
+            // Network error (i.e. connection refused, access denied due to CORS, etc.)
+            console.log("CORS Error");
+        }
+        else {
+            // something weird is happening
+            console.log("Something weird is happening!");
+        }
+    }
+//end snippet
     });
   }
