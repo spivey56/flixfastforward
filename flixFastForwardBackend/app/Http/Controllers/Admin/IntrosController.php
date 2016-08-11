@@ -25,13 +25,13 @@ class IntrosController extends Controller
     }
 
     /**
-     * @param id of intro episode
+     * @param title of intro episode
      * @return start and skip times in object
      */
-    public function getStartAndSkipTimes($id){
-        $intro = Intro::findOrFail($id);
-        $arry=array("start_time"=>$intro->start_time,
-            "duration"=>$intro->duration
+    public function getStartAndSkipTimes($title){
+        $intro = Intro::where("title","=",$title)->get();
+        $arry=array("start_time"=>$intro[0]->start_time,
+            "duration"=>$intro[0]->duration
             );
         return json_encode($arry);
     }
