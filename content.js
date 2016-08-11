@@ -1,4 +1,5 @@
 $(document).ready(function () {
+  var goneIn = false;
   time = setInterval(function(){
     var currentWindow = window.location.href;
     var timeSkip = 115;//Get this from database
@@ -23,10 +24,12 @@ $(document).ready(function () {
     }
     console.log(tvLong.slice(locNum + 15, locNum + 16));
     var title = tvName + "." + tvSeason + "." + tvEpisode;
-    var goneIn = false;
-    if(!title==="" && !goneIn){
-
+    console.log(goneIn);
+    if(true){
+      goneIn = true;
+      ajaxCall(title);
     }
+    console.log(title);
     if(currentWindow==="https://www.netflix.com/browse"){
       console.log("Browsing");
     } else {
@@ -52,24 +55,22 @@ $(document).ready(function () {
 
 });
 function ajaxCall(title) {
+  console.log("MADE IT");
     //-----------------------------------------------------------------------
     // 2) Send a http request with AJAX http://api.jquery.com/jQuery.ajax/
     //-----------------------------------------------------------------------
     $.ajax({
-      url: '',                  //the script to call to get data          
+      url: 'admin/intros/times/'+title,                  //the script to call to get data
       data: "",                        //you can insert url argumnets here to pass to api.php
-                                       //for example "id=5&parent=6"
+      type: "GET",                                 //for example "id=5&parent=6"
       dataType: 'json',                //data format
       success: function(data)          //on recieve of reply
       {
-        var id = data[0];              //get id
-        var vname = data[1];           //get name
-        //--------------------------------------------------------------------
-        // 3) Update html content
-        //--------------------------------------------------------------------
-        $('#output').html("<b>id: </b>"+id+"<b> name: </b>"+vname); //Set output element html
-        //recommend reading up on jquery selectors they are awesome
-        // http://api.jquery.com/category/selectors/
+        console.log(data);
+
+      },
+      error: function (error) {
+        console.log(error);
       }
     });
   }
