@@ -7,9 +7,26 @@ $(document).ready(function () {
     var tvLong = $("span").text();
     var locNum = tvLong.search("Season");
     var tvName = tvLong.slice(0, locNum);
-    var tvSeason = tvLong.slice(locNum + 7, locNum + 8);
-    var tvEpisode = tvLong.slice(locNum + 14, locNum + 15);
-    currentWindow.toString();
+    if(tvLong.slice(locNum + 8, locNum + 9)===":"){
+      var tvSeason = tvLong.slice(locNum + 7, locNum + 8);
+    } else {
+      var tvSeason = tvLong.slice(locNum + 7, locNum + 9);
+    }
+    var locEp = tvLong.search("Ep.");
+    var isInt = tvLong.slice(locEp+1, locEp + 2);
+    var epNum = parseInt(isInt);
+
+    if (Number.isInteger(epNum)) {
+      var tvEpisode = tvLong.slice(locNum + 14, locNum + 15);
+    } else {
+      var tvEpisode = tvLong.slice(locNum + 14, locNum + 16);
+    }
+    console.log(tvLong.slice(locNum + 15, locNum + 16));
+    var title = tvName + "." + tvSeason + "." + tvEpisode;
+    var goneIn = false;
+    if(!title==="" && !goneIn){
+
+    }
     if(currentWindow==="https://www.netflix.com/browse"){
       console.log("Browsing");
     } else {
@@ -18,13 +35,15 @@ $(document).ready(function () {
       var time = parseInt(skip);
       if (time >= timeSkip && time < toThisPoint - 1) {
         if (!localStorage.getItem("skipped")) {
-          var shouldLoad = currentWindow.search("&t=");
-          if(shouldLoad>0){
-            window.open(window.location.href, "_self");
-          } else {
-            window.open(window.location.href + "&t=" + toThisPoint, "_self");
-          }
-          localStorage.setItem("skipped", tvName + "." + tvSeason + "." + tvEpisode);
+			var shouldLoad = currentWindow.search("&t=");
+			if(shouldLoad>0){
+				window.open(window.location.href, "_self");
+			} else {
+				window.open(window.location.href + "&t=" + toThisPoint, "_self");
+			}
+			document.getElementById("loading").style.display = "none"
+            localStorage.setItem("skipped", tvName + "." + tvSeason + "." + tvEpisode);
+            }
           }
   }
           console.log(time);
@@ -32,3 +51,25 @@ $(document).ready(function () {
       }, 500);
 
 });
+function ajaxCall(title) {
+    //-----------------------------------------------------------------------
+    // 2) Send a http request with AJAX http://api.jquery.com/jQuery.ajax/
+    //-----------------------------------------------------------------------
+    $.ajax({
+      url: '',                  //the script to call to get data          
+      data: "",                        //you can insert url argumnets here to pass to api.php
+                                       //for example "id=5&parent=6"
+      dataType: 'json',                //data format
+      success: function(data)          //on recieve of reply
+      {
+        var id = data[0];              //get id
+        var vname = data[1];           //get name
+        //--------------------------------------------------------------------
+        // 3) Update html content
+        //--------------------------------------------------------------------
+        $('#output').html("<b>id: </b>"+id+"<b> name: </b>"+vname); //Set output element html
+        //recommend reading up on jquery selectors they are awesome
+        // http://api.jquery.com/category/selectors/
+      }
+    });
+  }
