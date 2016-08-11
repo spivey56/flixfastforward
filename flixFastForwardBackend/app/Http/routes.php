@@ -15,9 +15,9 @@ Route::get('/', function () {
     return view('admin/intros/index');
 });
 
-Route::get("admin/intros/times/{id}",function($id){
+Route::get("admin/intros/times/{title}",function($title){
     $intros=new \App\Http\Controllers\Admin\IntrosController();
-    echo $intros->getStartAndSkipTimes($id);
+    echo $intros->getStartAndSkipTimes($title);
 });
 
 Route::resource('admin/intros', 'Admin\\IntrosController');
