@@ -14,15 +14,15 @@ $(document).ready(function () {
       var tvSeason = tvLong.slice(locNum + 7, locNum + 9);
     }
     var locEp = tvLong.search("Ep.");
-    var isInt = tvLong.slice(locEp+1, locEp + 2);
-    var epNum = parseInt(isInt);
+    var isInt = tvLong.slice(locEp + 5, locEp+6);
 
-    if (Number.isInteger(epNum)) {
-      var tvEpisode = tvLong.slice(locNum + 14, locNum + 15);
-    } else {
-      var tvEpisode = tvLong.slice(locNum + 14, locNum + 16);
+    //if isInt is not a number
+    if(isNaN(isInt)){
+      var tvEpisode = tvLong.slice(locEp+4,locEp+5);
+    } else{ //if it is a number
+      var tvEpisode = tvLong.slice(locEp+4,locEp+6);
     }
-    console.log(tvLong.slice(locNum + 15, locNum + 16));
+    
     var title = tvName + "." + tvSeason + "." + tvEpisode;
     console.log(goneIn);
     if(true){
