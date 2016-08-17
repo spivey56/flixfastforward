@@ -27,7 +27,7 @@ $(document).ready(function () {
     console.log(goneIn);
     if(title!=".." && goneIn==false){
       goneIn = true;
-      ajaxCall('1');
+      ajaxCall(1);
     }
     console.log(title);
     if(currentWindow==="https://www.netflix.com/browse"){
@@ -60,26 +60,26 @@ function ajaxCall(title) {
     // 2) Send a http request with AJAX http://api.jquery.com/jQuery.ajax/
     //-----------------------------------------------------------------------
     $.ajax({
-
-      url: 'https://phplaravel-19273-43928-140812.cloudwaysapps.com/admin/intros/'+title,                  //the script to call to get data                      //you can insert url argumnets here to pass to api.php
+    //url: 'https://localhost:8000/admin/intros/times/'+title,
+    url: 'https://phplaravel-19273-43928-140812.cloudwaysapps.com/admin/intros/times/'+title,                  //the script to call to get data                      //you can insert url argumnets here to pass to api.php
       type: "GET",                                 //for example "id=5&parent=6"
-      dataType: 'json',                //data format
       success: function(data)          //on recieve of reply
       {
         console.log("Success!");
-        console.log(data);
+        console.log($.parseJSON(data));
 
       },
 // start snippet
 error: function(XMLHttpRequest, textStatus, errorThrown) {
+    console.log("ERROR has occurred.");
         if (XMLHttpRequest.readyState == 4) {
             // HTTP error (can be checked by XMLHttpRequest.status and XMLHttpRequest.statusText)
 
-            console.log("HTTP ERROR " +errorThrown);
+            console.log("HTTP ERROR " + textStatus);
         }
         else if (XMLHttpRequest.readyState == 0) {
             // Network error (i.e. connection refused, access denied due to CORS, etc.)
-            console.log("CORS Error "+ errorThrown);
+            console.log("CORS Error "+ textStatus);
         }
         else {
             // something weird is happening
