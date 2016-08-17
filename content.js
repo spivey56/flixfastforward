@@ -1,5 +1,6 @@
 var dataObject = null;
 var goneIn = false;
+var win = window.location.href;
 $(document).ready(function () {
   var timeSkip = "";
   var intro = "";
@@ -32,7 +33,9 @@ $(document).ready(function () {
       var tvEpisode = tvLong.slice(locEp + 4, locEp + 6);
     }
     var title = tvName + "." + tvSeason + "." + tvEpisode;
-    if (title !== ".." && !goneIn) {
+
+    if ((title !== ".." && !goneIn)||(win!==currentWindow)) {
+      dataObject = null;
       ajaxCall(title);
     }
 
@@ -59,6 +62,7 @@ $(document).ready(function () {
 });
 function ajaxCall(title) {
   console.log("MADE IT");
+  console.log(title);
   //-----------------------------------------------------------------------
   // 2) Send a http request with AJAX http://api.jquery.com/jQuery.ajax/
   //-----------------------------------------------------------------------
@@ -71,6 +75,7 @@ function ajaxCall(title) {
       console.log("Success!");
       dataObject = $.parseJSON(data);
       goneIn = true;
+      win = window.location.href;
       //localStorage.setItem("skipTime", dataObject.start_time);
       //localStorage.setItem("skipDuration", dataObject.duration);
       //console.log(localStorage.getItem("skipDuration"));
