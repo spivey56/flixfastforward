@@ -1,7 +1,6 @@
 var dataObject = null;
-
+var goneIn = false;
 $(document).ready(function () {
-  var goneIn = false;
   var timeSkip = "";
   var intro = "";
   time = setInterval(function () {
@@ -32,16 +31,15 @@ $(document).ready(function () {
     } else { //if it is a number
       var tvEpisode = tvLong.slice(locEp + 4, locEp + 6);
     }
-
     var title = tvName + "." + tvSeason + "." + tvEpisode;
-    if (title != ".." && goneIn == false) {
-      goneIn = true;
+    if (title !== ".." && !goneIn) {
       ajaxCall(title);
-
     }
+
+    console
     if (currentWindow === "https://www.netflix.com/browse") {
       console.log("Browsing");
-    } 
+    }
     else {
       var skip = $("video").get(0).currentTime;
       var time = parseInt(skip);
@@ -72,7 +70,7 @@ function ajaxCall(title) {
     {
       console.log("Success!");
       dataObject = $.parseJSON(data);
-
+      goneIn = true;
       //localStorage.setItem("skipTime", dataObject.start_time);
       //localStorage.setItem("skipDuration", dataObject.duration);
       //console.log(localStorage.getItem("skipDuration"));
