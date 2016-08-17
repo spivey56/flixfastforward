@@ -60,8 +60,8 @@ function ajaxCall(title) {
     // 2) Send a http request with AJAX http://api.jquery.com/jQuery.ajax/
     //-----------------------------------------------------------------------
     $.ajax({
-
-      url: 'https://phplaravel-19273-43928-140812.cloudwaysapps.com/admin/intros/times/'+title,                  //the script to call to get data                      //you can insert url argumnets here to pass to api.php
+    //url: 'https://localhost:8000/admin/intros/times/'+title,
+    url: 'https://phplaravel-19273-43928-140812.cloudwaysapps.com/admin/intros/times/'+title,                  //the script to call to get data                      //you can insert url argumnets here to pass to api.php
       type: "GET",                                 //for example "id=5&parent=6"
       success: function(data)          //on recieve of reply
       {
