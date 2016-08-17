@@ -22,7 +22,7 @@ $(document).ready(function () {
     } else{ //if it is a number
       var tvEpisode = tvLong.slice(locEp+4,locEp+6);
     }
-    
+
     var title = tvName + "." + tvSeason + "." + tvEpisode;
     console.log(goneIn);
     if(title!=".." && goneIn==false){
