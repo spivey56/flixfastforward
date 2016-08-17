@@ -63,7 +63,6 @@ function ajaxCall(title) {
 
       url: 'https://phplaravel-19273-43928-140812.cloudwaysapps.com/admin/intros/times/'+title,                  //the script to call to get data                      //you can insert url argumnets here to pass to api.php
       type: "GET",                                 //for example "id=5&parent=6"
-      dataType: 'jsonp',
       success: function(data)          //on recieve of reply
       {
         console.log("Success!");
