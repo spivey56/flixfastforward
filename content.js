@@ -2,8 +2,8 @@ $(document).ready(function () {
   var goneIn = false;
   time = setInterval(function(){
     var currentWindow = window.location.href;
-    var timeSkip = 115;//Get this from database
-    var intro = 34; //call from database depending on tvName
+    var timeSkip = localStorage.getItem("skipTime");//Get this from database
+    var intro = localStorage.getItem("skipDuration"); //call from database depending on tvName
     var toThisPoint = timeSkip + intro;
     var tvLong = $("span").text();
     var locNum = tvLong.search("Season");
@@ -24,12 +24,11 @@ $(document).ready(function () {
     }
 
     var title = tvName + "." + tvSeason + "." + tvEpisode;
-    console.log(goneIn);
     if(title!=".." && goneIn==false){
       goneIn = true;
-      ajaxCall(1);
+      ajaxCall(title);
+
     }
-    console.log(title);
     if(currentWindow==="https://www.netflix.com/browse"){
       console.log("Browsing");
     } else {
@@ -37,20 +36,18 @@ $(document).ready(function () {
       var skip = $("video").get(0).currentTime;
       var time = parseInt(skip);
       if (time >= timeSkip && time < toThisPoint - 1) {
-        if (!localStorage.getItem("skipped")) {
-			var shouldLoad = currentWindow.search("&t=");
-			if(shouldLoad>0){
-				window.open(window.location.href, "_self");
-			} else {
-				window.open(window.location.href + "&t=" + toThisPoint, "_self");
-			}
-			document.getElementById("loading").style.display = "none"
+      if (!localStorage.getItem("skipped")) {
+  			var shouldLoad = currentWindow.search("&t=");
+  			if(shouldLoad>0){
+  				window.open(window.location.href, "_self");
+  			} else {
+  				window.open(window.location.href + "&t=" + toThisPoint, "_self");
+  			}
+			  document.getElementById("loading").style.display = "none"
             localStorage.setItem("skipped", tvName + "." + tvSeason + "." + tvEpisode);
             }
           }
   }
-          console.log(time);
-
       }, 500);
 
 });
@@ -61,12 +58,16 @@ function ajaxCall(title) {
     //-----------------------------------------------------------------------
     $.ajax({
     //url: 'https://localhost:8000/admin/intros/times/'+title,
-    url: 'https://phplaravel-19273-43928-140812.cloudwaysapps.com/admin/intros/times/'+title,                  //the script to call to get data                      //you can insert url argumnets here to pass to api.php
+      url: 'https://phplaravel-19273-43928-140812.cloudwaysapps.com/admin/intros/times/'+title,                  //the script to call to get data                      //you can insert url argumnets here to pass to api.php
       type: "GET",                                 //for example "id=5&parent=6"
       success: function(data)          //on recieve of reply
       {
         console.log("Success!");
-        console.log($.parseJSON(data));
+        var dataObject = $.parseJSON(data);
+        localStorage.setItem("skipTime", dataObject.start_time);
+        localStorage.setItem("skipDuration", dataObject.duration);
+        console.log(localStorage.getItem("skipDuration"));
+        console.log(localStorage.getItem("skipTime"));
 
       },
 // start snippet
