@@ -16,8 +16,8 @@ Route::get('/', function () {
 });
 
 Route::get("admin/intros/times/{title}", ['middleware' => 'cors', function($title){
-    header('Access-Control-Allow-Origin: *');
-    header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+    // header('Access-Control-Allow-Origin: *');
+    // header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
     $intros=new \App\Http\Controllers\Admin\IntrosController();
     echo $intros->getStartAndSkipTimes($title);
 }]);
