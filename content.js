@@ -2,60 +2,60 @@ var dataObject;
 var timeSkip;
 var intro;
 var title;
-
+var win = window.location.href;
 $(document).ready(function () {
     dataObject = null;
 
     time = setInterval(function () {
 
-        var tvLong = $("span").text();
-        var locNum = tvLong.search("Season");
-        var tvName = tvLong.slice(0, locNum);
-        if (tvLong.slice(locNum + 8, locNum + 9) === ":") {
-            var tvSeason = tvLong.slice(locNum + 7, locNum + 8);
-        } else {
-            var tvSeason = tvLong.slice(locNum + 7, locNum + 9);
-        }
-        var locEp = tvLong.search("Ep.");
-        var isInt = tvLong.slice(locEp + 5, locEp + 6);
+        if (window.location.href.search("watch") > 0) {
+          var tvLong = $("span").text();
+          var locNum = tvLong.search("Season");
+          var tvName = tvLong.slice(0, locNum);
+          if (tvLong.slice(locNum + 8, locNum + 9) === ":") {
+              var tvSeason = tvLong.slice(locNum + 7, locNum + 8);
+          } else {
+              var tvSeason = tvLong.slice(locNum + 7, locNum + 9);
+          }
+          var locEp = tvLong.search("Ep.");
+          var isInt = tvLong.slice(locEp + 5, locEp + 6);
 
-        //if isInt is not a number
-        if (isNaN(isInt)) {
-            var tvEpisode = tvLong.slice(locEp + 4, locEp + 5);
-        } else { //if it is a number
-            var tvEpisode = tvLong.slice(locEp + 4, locEp + 6);
-        }
-        title = tvName + "." + tvSeason + "." + tvEpisode;
+          //if isInt is not a number
+          if (isNaN(isInt)) {
+              var tvEpisode = tvLong.slice(locEp + 4, locEp + 5);
+          } else { //if it is a number
+              var tvEpisode = tvLong.slice(locEp + 4, locEp + 6);
+          }
+          title = tvName + "." + tvSeason + "." + tvEpisode;
 
-        if (title != "..") {
+          if ((title != "..")||(win!==currentWindow)) {
+            dataObject = null;
+              if (sessionStorage.getItem(title)) {
+                  var dataPulled=sessionStorage.getItem(title).split(":");
+                  timeSkip = parseInt(dataPulled[0]);
+                  intro = parseInt(dataPulled[1]);
+              }
+              else {
 
-            if (sessionStorage.getItem(title)) {
-                var dataPulled=sessionStorage.getItem(title).split(":");
-                timeSkip = parseInt(dataPulled[0]);
-                intro = parseInt(dataPulled[1]);
-            }
-            else {
-
-                if (dataObject == null) {
-                    ajaxCall(title);
-                }
-                else {
-                    timeSkip = parseInt(dataObject.start_time);
-                    intro = parseInt(dataObject.duration);
-                }
-            }
-
-        }
-
-        if (window.location.href != "https://www.netflix.com/browse" && window.location.href.search("watch") > 0) {
-
+                  if (dataObject == null) {
+                      ajaxCall(title);
+                  }
+                  else {
+                      timeSkip = parseInt(dataObject.start_time);
+                      intro = parseInt(dataObject.duration);
+                  }
+              }
+          }
             var skip = $("video").get(0).currentTime;
             var currentTime = parseInt(skip);
 
             if (currentTime >= timeSkip && currentTime < (timeSkip + intro) - 4) {
                 window.open(window.location.href + "&t=" + (timeSkip + intro), "_self");
             }
+        } else {
+          console.log("Browsing");
         }
+
 
     }, 100);
 
