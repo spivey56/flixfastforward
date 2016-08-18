@@ -64,8 +64,8 @@
       <file leaf-file-name="content.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/content.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="435">
-              <caret line="52" column="77" selection-start-line="52" selection-start-column="77" selection-end-line="52" selection-end-column="77" />
+            <state relative-caret-position="27">
+              <caret line="34" column="47" selection-start-line="34" selection-start-column="47" selection-end-line="34" selection-end-column="47" />
               <folding />
             </state>
           </provider>
@@ -270,7 +270,7 @@
       <workItem from="1470944091263" duration="1796000" />
       <workItem from="1471100889608" duration="12000" />
       <workItem from="1471401425028" duration="1132000" />
-      <workItem from="1471488774572" duration="3747000" />
+      <workItem from="1471488774572" duration="4370000" />
     </task>
     <task id="LOCAL-00001" summary="updated composer removed migrations causing trouble">
       <created>1470712071990</created>
@@ -283,7 +283,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="24315000" />
+    <option name="totallyTimeSpent" value="24938000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="24" width="1280" height="716" extended-state="0" />
@@ -630,8 +630,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/content.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="435">
-          <caret line="52" column="77" selection-start-line="52" selection-start-column="77" selection-end-line="52" selection-end-column="77" />
+        <state relative-caret-position="27">
+          <caret line="34" column="47" selection-start-line="34" selection-start-column="47" selection-end-line="34" selection-end-column="47" />
           <folding />
         </state>
       </provider>

@@ -1,6 +1,7 @@
 var dataObject;
 var timeSkip;
 var intro;
+var title;
 
 $(document).ready(function () {
     dataObject = null;
@@ -24,13 +25,14 @@ $(document).ready(function () {
         } else { //if it is a number
             var tvEpisode = tvLong.slice(locEp + 4, locEp + 6);
         }
-        var title = tvName + "." + tvSeason + "." + tvEpisode;
+        title = tvName + "." + tvSeason + "." + tvEpisode;
 
         if (title != "..") {
 
-            if (sessionStorage.getItem("timeSkip") && sessionStorage.getItem("intro")) {
-                timeSkip = parseInt(sessionStorage.getItem("timeSkip"));
-                intro = parseInt(sessionStorage.getItem("intro"));
+            if (sessionStorage.getItem(title)) {
+                var dataPulled=sessionStorage.getItem(title).split(":");
+                timeSkip = parseInt(dataPulled[0]);
+                intro = parseInt(dataPulled[1]);
             }
             else {
 
@@ -50,8 +52,8 @@ $(document).ready(function () {
             var skip = $("video").get(0).currentTime;
             var currentTime = parseInt(skip);
 
-            if (currentTime >= timeSkip && currentTime < (timeSkip+intro) - 4) {
-                window.open(window.location.href + "&t=" + (timeSkip+intro), "_self");
+            if (currentTime >= timeSkip && currentTime < (timeSkip + intro) - 4) {
+                window.open(window.location.href + "&t=" + (timeSkip + intro), "_self");
             }
         }
 
@@ -69,8 +71,7 @@ function ajaxCall(title) {
         {
             console.log("Success!");
             dataObject = $.parseJSON(data)
-            sessionStorage.setItem("timeSkip", dataObject.start_time);
-            sessionStorage.setItem("intro", dataObject.duration);
+            sessionStorage.setItem(title, dataObject.start_time + ":" + dataObject.duration);
 
         },
         // start snippet
