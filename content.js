@@ -27,7 +27,7 @@ $(document).ready(function () {
               var tvEpisode = tvLong.slice(locEp + 4, locEp + 6);
           }
           var newTvName = "";
-          if(tvName.search("/")>0 ||tvName.search("%")>0||tvName.search("\\")>0){
+          if(tvName.search("/")>0 ||tvName.search("%")>0||tvName.search("\\")>0) {
             for(var i=0; i<tvName.length; i++){
               if(tvName.charAt(i) === "/"||tvName.charAt(i) === "\\"||tvName.charAt(i) === "%"){
                 newTvName += '_';
@@ -61,7 +61,11 @@ $(document).ready(function () {
             var currentTime = parseInt(skip);
 
             if (currentTime >= timeSkip && currentTime < (timeSkip + intro) - 4) {
-                window.open(window.location.href + "&t=" + (timeSkip + intro), "_self");
+              if(win.search("&t=") > 0){
+                  window.open(window.location.href, "_self");
+                } else {
+                  window.open(window.location.href + "&t=" + (timeSkip + intro), "_self");
+                }
             }
         } else {
           console.log("Browsing");
